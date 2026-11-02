@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажер печати</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="app-layout">
+        
+        <aside class="sidebar left-sidebar">
+            <h3>Руководство</h3>
+            <ul>
+                <li><b>Раскладка:</b> Левая рука на ФЫВА, правая на ОЛДЖ. Большие пальцы на пробел.</li>
+                <li><b>Осанка:</b> Спина ровно, локти под 90 градусов.</li>
+                <li><b>Ориентир:</b> Бугорки на клавишах А и О.</li>
+                <li><b>Взгляд:</b> Только в экран, на клавиши не смотреть!</li>
+                <li><b>Темп:</b> Сначала точность, потом скорость.</li>
+            </ul>
+        </aside>
+
+        <div class="container">
+            <h1>Тренажер печати</h1>
+            
+            <div class="settings">
+                <div>
+                    <label for="modeSel">Режим:</label>
+                    <select id="modeSel">
+                        <option value="english">Английский</option>
+                        <option value="russian">Русский</option>
+                        <option value="code">C++</option>
+                        <option value="python">Python</option>
+                        <option value="literature">Литература</option>
+                        <option value="custom">Свой текст</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="diffSel">Сложность:</label>
+                    <select id="diffSel">
+                        <option value="easy">Легкая</option>
+                        <option value="medium">Средняя</option>
+                        <option value="hard">Высокая</option>
+                    </select>
+                </div>
+
+                <div id="workDiv" style="display: none;">
+                    <label for="workSel">Книга:</label>
+                    <select id="workSel">
+                        <option value="onegin">Евгений Онегин</option>
+                        <option value="dead_souls">Мертвые души</option>
+                        <option value="fathers_and_sons">Отцы и дети</option>
+                        <option value="crime_and_punishment">Преступление и наказание</option>
+                        <option value="war_and_peace">Война и мир</option>
+                    </select>
+                </div>
+
+                <div id="customDiv" style="display: none; width: 100%;">
+                    <label for="customTxt">Ваш текст:</label>
+                    <textarea id="customTxt" placeholder="Вставляй сюда..." rows="2"></textarea>
+                </div>
+
+                <div>
+                    <label for="oppSel">Соперник:</label>
+                    <select id="oppSel">
+                        <option value="0">Нет</option>
+                        <option value="20">Легкий (100 зн/мин)</option>
+                        <option value="40">Средний (200 зн/мин)</option>
+                        <option value="60">Профессионал (300 зн/мин)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="gameSec" style="display: none;">
+                <div class="progress-block">
+                    <p>Вы: <span id="pProgTxt">0%</span></p>
+                    <div class="progress-bar"><div id="pProg" class="fill player-fill"></div></div>
+                </div>
+                
+                <div class="progress-block" id="oppBlock" style="display: none;">
+                    <p>Соперник: <span id="oProgTxt">0%</span></p>
+                    <div class="progress-bar"><div id="oProg" class="fill bot-fill"></div></div>
+                </div>
+            </div>
+
+            <div class="main-area">
+                <div id="wordToType" class="word-container">Нажми "Начать"</div>
+                <textarea id="typeInput" placeholder="Печатай тут..." disabled autocomplete="off" spellcheck="false" rows="1"></textarea>
+                
+                <div class="buttons">
+                    <button id="btnStart">Начать</button>
+                    <button id="btnCancel" style="display: none; background: #f44747; color: white;">Стоп</button>
+                </div>
+            </div>
+
+            <div id="kbWrap" class="keyboard-container" style="display: none;">
+                <div id="kb"></div>
+            </div>
+
+            <div class="bottom-panel">
+                <div class="stats">
+                    <p>Время: <span id="tTime">0.0</span> с.</p>
+                    <p>Скорость: <span id="tCpm">0</span> зн/мин (<span id="tWpm">0</span> сл/мин)</p>
+                    <p>Точность: <span id="tAcc">100</span>%</p>
+                </div>
+            </div>
+        </div>
+
+        <aside class="sidebar right-sidebar">
+            <h3>Статус</h3>
+            <div class="rank-display" id="rankTitle">Ожидание</div>
+            <p class="rank-desc" id="rankDesc">Нажми кнопку чтобы начать.</p>
+            
+            <hr class="divider">
+
+            <h3>Рекорды</h3>
+            <ul id="leaderboard" class="leaderboard-list">
+                <li>Пусто</li>
+            </ul>
+
+            <hr class="divider">
+
+            <h3>Всего</h3>
+            <div class="global-stats">
+                <p>Тестов: <span id="globTests">0</span></p>
+                <p>Рекорд: <span id="globBest">0</span> зн/мин</p>
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
